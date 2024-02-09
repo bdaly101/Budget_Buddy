@@ -37,7 +37,6 @@ const typeDefs = `
     getExpenseById(id: ID!): Expense
     getPurchases: [Purchase]
     getPurchaseById(id: ID!): Purchase
-    monthSpending(userId: ID!): Float
   }
 
   type Mutation {
