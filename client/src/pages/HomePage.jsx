@@ -1,4 +1,5 @@
-import { useState, useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
+import { Container, Row, Col } from 'react-bootstrap'; // Adjust this import based on your styling needs
 import { getMe, deleteBook } from '../utils/API';
 import Auth from '../utils/auth';
 import { removeBookId } from '../utils/localStorage';
@@ -63,6 +64,9 @@ const SavedBooks = () => {
     return <h2>LOADING...</h2>;
   }
 
+  // Constant array for days
+  const days = ['Today', 'Tomorrow', 'Weekly', 'Monthly'];
+
   return (
     <>
       <div>
@@ -74,70 +78,18 @@ const SavedBooks = () => {
         <h2>Budget Overview:</h2>
         {/* Display budget-related information here */}
         <Row>
-          <Col>
-            <div>
-              {userData.savedBooks.map((book) => {
-            return (
-              <Col >
-                <div>
-                  <div>
-                    <h3>Expenses Due Today</h3>
-                    <p >Authors: {book.authors}</p>
-                  </div>
-                </div>
-              </Col>
-            );
-          })}
-            </div>
-          </Col>
-          <Col>
-            <div >
-              {userData.savedBooks.map((book) => {
-            return (
-              <Col >
-                <div>
-                  <div>
-                    <h3>Expenses Due Tomorrow</h3>
+          {days.map((days) => (
+            <Col key={days}>
+              <div>
+                <h3>Expenses Due {days}</h3>
+                {userData.savedBooks.map((book) => (
+                  <div key={book.bookId}>
                     <p>Authors: {book.authors}</p>
                   </div>
-                </div>
-              </Col>
-            );
-          })}
-            </div>
-          </Col>
-          <Col>
-            <div>
-              {userData.savedBooks.map((book) => {
-            return (
-              <Col >
-                <div>
-                  <div>
-                    <h3>Expenses Due Weekly</h3>
-                    <p >Authors: {book.authors}</p>
-                  </div>
-                </div>
-              </Col>
-            );
-          })}
-            </div>
-          </Col>
-          <Col>
-            <div>
-              {userData.savedBooks.map((book) => {
-            return (
-              <Col >
-                <div>
-                  <div>
-                    <h3>Expenses Due Monthly</h3>
-                    <p >Authors: {book.authors}</p>
-                  </div>
-                </div>
-              </Col>
-            );
-          })}
-            </div>
-          </Col>
+                ))}
+              </div>
+            </Col>
+          ))}
         </Row>
         <h2>Left in Budget: ?</h2>
       </Container>
