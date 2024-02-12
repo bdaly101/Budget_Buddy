@@ -58,7 +58,7 @@ const resolvers = {
       await User.findByIdAndUpdate(userId, { $push: { expenses: expense._id } });
       return expense;
     },
-    createPurchase: async (parent, { importance, expenseId }) => {
+    addPurchase: async (parent, { importance, expenseId }) => {
       const purchase = await Purchase.create({ importance, expense: expenseId });
       await Expense.findByIdAndUpdate(expenseId, { $push: { purchases: purchase._id } });
       return purchase;
