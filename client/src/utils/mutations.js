@@ -38,9 +38,9 @@ export const CREATE_EXPENSE = gql`
   }
 `;
 
-export const CREATE_PURCHASE = gql`
-  mutation createPurchase($importance: String!, $expenseId: ID!) {
-    createPurchase(importance: $importance, expenseId: $expenseId) {
+export const ADD_PURCHASE = gql`
+  mutation addPurchase($importance: String!, $expenseId: ID!) {
+    addPurchase(importance: $importance, expenseId: $expenseId) {
       _id
       importance
       createdAt

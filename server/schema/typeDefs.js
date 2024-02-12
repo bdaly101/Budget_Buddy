@@ -43,7 +43,7 @@ const typeDefs = `
     addUser(username: String!, firstName: String!, lastName: String!, email: String!, password: String!, money: Float!, goal: Float!): User
     login(email: String!, password: String!): AuthPayload
     createExpense(name: String!, userId: ID!): Expense
-    createPurchase(importance: String!, expenseId: ID!): Purchase
+    addPurchase(importance: String!, expenseId: ID!): Purchase
     updateUser(id: ID!, username: String, firstName: String, lastName: String, email: String, password: String, money: Float, goal: Float): User
     updateExpense(id: ID!, name: String!): Expense
     updatePurchase(id: ID!, importance: String!): Purchase
