@@ -4,6 +4,7 @@ import { createBrowserRouter, RouterProvider } from 'react-router-dom'
 import App from './App.jsx'
 
 import HomePage from './pages/HomePage'
+import Profile from './pages/Profile.jsx'
 
 
 const router = createBrowserRouter([
@@ -15,6 +16,11 @@ const router = createBrowserRouter([
       {
         index: true,
         element: <HomePage />
+
+      }, {
+        path: '/saved',
+        element: <Profile />
+
       }
     ]
   }
