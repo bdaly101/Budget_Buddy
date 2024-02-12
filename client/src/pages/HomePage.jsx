@@ -1,10 +1,9 @@
 import React, { useState, useEffect } from 'react';
-import { Container, Row, Col } from 'react-bootstrap'; // Adjust this import based on your styling needs
 import { getMe, deleteBook } from '../utils/API';
 import Auth from '../utils/auth';
 import { removeBookId } from '../utils/localStorage';
 
-const SavedBooks = () => {
+const HomePage = () => {
   const [userData, setUserData] = useState({});
 
   // use this to determine if `useEffect()` hook needs to run again
@@ -70,31 +69,27 @@ const SavedBooks = () => {
   return (
     <>
       <div>
-        <Container>
-          <h1>Welcome back, {userData.username}!</h1>
-        </Container>
+        <h1>Welcome back, {userData.username}!</h1>
       </div>
-      <Container>
+      <div>
         <h2>Budget Overview:</h2>
         {/* Display budget-related information here */}
-        <Row>
+        <div>
           {days.map((days) => (
-            <Col key={days}>
-              <div>
-                <h3>Expenses Due {days}</h3>
-                {userData.savedBooks.map((book) => (
-                  <div key={book.bookId}>
-                    <p>Authors: {book.authors}</p>
-                  </div>
-                ))}
-              </div>
-            </Col>
+            <div key={days}>
+              <h3>Expenses Due {days}</h3>
+              {userData.HomePage.map((book) => (
+                <div key={book.bookId}>
+                  <p>Dues: {book.authors}</p>
+                </div>
+              ))}
+            </div>
           ))}
-        </Row>
+        </div>
         <h2>Left in Budget: ?</h2>
-      </Container>
+      </div>
     </>
   );
 };
 
-export default SavedBooks;
+export default HomePage;
