@@ -1,6 +1,8 @@
+"use client";
 // see SignupForm.js for comments
 import { useState } from 'react';
-
+import { Button, Checkbox, Label, TextInput, Alert } from 'flowbite-react';
+import { IoIosAlert } from "react-icons/io";
 import { loginUser } from '../utils/API';
 import Auth from '../utils/auth';
 
@@ -48,42 +50,43 @@ const LoginForm = () => {
 
   return (
     <>
-      <Form noValidate validated={validated} onSubmit={handleFormSubmit}>
-        <Alert dismissible onClose={() => setShowAlert(false)} show={showAlert} variant='danger'>
-          Something went wrong with your login credentials!
+      <form className="flex max-w-md flex-col gap-4" noValidate validated={validated} onSubmit={handleFormSubmit}>
+        <Alert color="failure" onDismiss={() => alert('Alert dismissed!')} icon={IoIosAlert}>
+          Something went wrong, please try again.
         </Alert>
-        <Form.Group className='mb-3'>
-          <Form.Label htmlFor='email'>Email</Form.Label>
-          <Form.Control
-            type='text'
-            placeholder='Your email'
-            name='email'
+        <div>
+          <div>
+            <Label htmlFor="email1" value="Your email" />
+          </div>
+          <TextInput id="email1"
+            type="email"
+            placeholder="yourname@email.com"
             onChange={handleInputChange}
             value={userFormData.email}
             required
           />
-          <Form.Control.Feedback type='invalid'>Email is required!</Form.Control.Feedback>
-        </Form.Group>
-
-        <Form.Group className='mb-3'>
-          <Form.Label htmlFor='password'>Password</Form.Label>
-          <Form.Control
-            type='password'
-            placeholder='Your password'
-            name='password'
+        </div>
+        <div>
+          <div className="mb-2 block">
+            <Label htmlFor="password1" value="Your password" />
+          </div>
+          <TextInput id="password1" type="password" 
             onChange={handleInputChange}
             value={userFormData.password}
             required
           />
-          <Form.Control.Feedback type='invalid'>Password is required!</Form.Control.Feedback>
-        </Form.Group>
+        </div>
+        <div className="flex items-center gap-2">
+          <Checkbox id="remember" />
+          <Label htmlFor="remember">Remember me</Label>
+        </div>
         <Button
           disabled={!(userFormData.email && userFormData.password)}
           type='submit'
           variant='success'>
           Submit
         </Button>
-      </Form>
+      </form>
     </>
   );
 };

@@ -1,5 +1,6 @@
 import { useState } from 'react';
-
+import { Button, Checkbox, Label, TextInput, Alert } from 'flowbite-react';
+import Link from 'next/link';
 import { createUser } from '../utils/API';
 import Auth from '../utils/auth';
 
@@ -51,12 +52,11 @@ const SignupForm = () => {
   return (
     <>
       {/* This is needed for the validation functionality above */}
-      <Form noValidate validated={validated} onSubmit={handleFormSubmit}>
+      <form className="flex max-w-md flex-col gap-4" noValidate validated={validated} onSubmit={handleFormSubmit}>
         {/* show alert if server response is bad */}
-        <Alert dismissible onClose={() => setShowAlert(false)} show={showAlert} variant='danger'>
-          Something went wrong with your signup!
+        <Alert color="failure" onDismiss={() => alert('Alert dismissed!')} icon={IoIosAlert}>
+          Something went wrong, please try again.
         </Alert>
-
         <Form.Group className='mb-3'>
           <Form.Label htmlFor='username'>Username</Form.Label>
           <Form.Control
@@ -101,7 +101,7 @@ const SignupForm = () => {
           variant='success'>
           Submit
         </Button>
-      </Form>
+      </form>
     </>
   );
 };
