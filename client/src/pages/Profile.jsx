@@ -66,7 +66,7 @@ const Profile = () => {
           </div>
         )}
         {editMode && (
-          <button onClick={() => setEditMode(false)}>Save Changes</button>
+          <button onClick={() => setEditMode(false)}>Save Changes</button> //save changes button
         )}
       </div>
     </div>
