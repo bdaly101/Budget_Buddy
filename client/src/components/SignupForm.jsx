@@ -57,44 +57,43 @@ const SignupForm = () => {
         <Alert color="failure" onDismiss={() => alert('Alert dismissed!')} icon={IoIosAlert}>
           Something went wrong, please try again.
         </Alert>
-        <Form.Group className='mb-3'>
-          <Form.Label htmlFor='username'>Username</Form.Label>
-          <Form.Control
-            type='text'
-            placeholder='Your username'
-            name='username'
+        <div>
+          <div>
+            <Label htmlFor="email2" value="Your email" />
+          </div>
+          <TextInput id="email2" type="email" placeholder="yourname@email.com" shadow
             onChange={handleInputChange}
             value={userFormData.username}
             required
           />
-          <Form.Control.Feedback type='invalid'>Username is required!</Form.Control.Feedback>
-        </Form.Group>
-
-        <Form.Group className='mb-3'>
-          <Form.Label htmlFor='email'>Email</Form.Label>
-          <Form.Control
-            type='email'
-            placeholder='Your email address'
+        </div>
+        <div>
+          <div className="mb-2 block">
+            <Label htmlFor="password2" value="Your password" />
+          </div>
+          <TextInput 
+            id="password2" 
+            type="password"
             name='email'
             onChange={handleInputChange}
             value={userFormData.email}
             required
+            shadow
           />
-          <Form.Control.Feedback type='invalid'>Email is required!</Form.Control.Feedback>
-        </Form.Group>
-
-        <Form.Group className='mb-3'>
-          <Form.Label htmlFor='password'>Password</Form.Label>
-          <Form.Control
-            type='password'
+        </div>
+        <div>
+          <div className="mb-2 block">
+            <Label htmlFor="repeat-password" value="Repeat password" />
+          </div>
+          <TextInput id="repeat-password" type="password"
             placeholder='Your password'
             name='password'
             onChange={handleInputChange}
             value={userFormData.password}
             required
           />
-          <Form.Control.Feedback type='invalid'>Password is required!</Form.Control.Feedback>
-        </Form.Group>
+        </div>
+        
         <Button
           disabled={!(userFormData.username && userFormData.email && userFormData.password)}
           type='submit'
