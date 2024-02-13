@@ -31,6 +31,12 @@ const resolvers = {
     getPurchaseById: async (parent, { id }) => {
       return Purchase.findById(id);
     },
+    me: async (parent, args, context) => {
+      if (context.user) {
+        return User.findOne({ _id: context.user._id }).populate('thoughts');
+      }
+      throw AuthenticationError;
+    },
   },
 
   Mutation: {

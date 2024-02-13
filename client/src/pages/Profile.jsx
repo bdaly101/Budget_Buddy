@@ -1,21 +1,19 @@
-import React, { useState } from 'react';
-import { useParams, Link, Navigate } from 'react-router-dom';
+import { Navigate, useParams } from 'react-router-dom';
 import { useQuery } from '@apollo/client';
-import ThoughtForm from '../components/ThoughtForm';
-import ThoughtList from '../components/ThoughtList';
+
 import { QUERY_USER, QUERY_ME } from '../utils/queries';
+
 import Auth from '../utils/auth';
 
 const Profile = () => {
   const { username: userParam } = useParams();
+
   const { loading, data } = useQuery(userParam ? QUERY_USER : QUERY_ME, {
     variables: { username: userParam },
   });
 
   const user = data?.me || data?.user || {};
-  const [editMode, setEditMode] = useState(false);
-
-  // Navigate to personal profile page if username is yours
+  // navigate to personal profile page if username is yours
   if (Auth.loggedIn() && Auth.getProfile().data.username === userParam) {
     return <Navigate to="/me" />;
   }
@@ -34,33 +32,25 @@ const Profile = () => {
   }
 
   return (
-    <div className="profile-container">
-      <div className="profile-header">
-        <h2>
+    <div>
+      <div className="flex-row justify-center mb-3">
+        <h2 className="col-12 col-md-10 bg-dark text-light p-3 mb-5">
           Viewing {userParam ? `${user.username}'s` : 'your'} profile.
         </h2>
+
+        <div className="col-12 col-md-10 mb-5">
+          <ThoughtList
+            thoughts={user.thoughts}
+            title={`${user.username}'s thoughts...`}
+            showTitle={false}
+            showUsername={false}
+          />
+        </div>
         {!userParam && (
-          <button onClick={() => setEditMode(true)}>Edit Information</button>
-        )}
-      </div>
-      <div className="profile-info">
-        <p>Username: {user.username}</p>
-        <p>First Name: {user.firstName}</p>
-        <p>Last Name: {user.lastName}</p>
-        <p>Email: {user.email}</p>
-        {editMode && (
-          <button onClick={() => setEditMode(false)}>Save Changes</button>
-        )}
-      </div>
-      <div className="thoughts-section">
-        <ThoughtList
-          thoughts={user.thoughts}
-          title={`${user.username}'s thoughts...`}
-          showTitle={false}
-          showUsername={false}
-        />
-        {!userParam && (
-          <div className="thought-form">
+          <div
+            className="col-12 col-md-10 mb-3 p-3"
+            style={{ border: '1px dotted #1a1a1a' }}
+          >
             <ThoughtForm />
           </div>
         )}
