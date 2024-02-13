@@ -23,10 +23,10 @@ const Nav = () => {
   return (
     <>
       <nav className=" flex w-1/3 justify-end">
-        <div className="hidden w-full justify-between md:flex">
+        <div className="w-full justify-between md:flex">
           <NavLink />
         </div>
-        <div className="md:hidden">
+        <div className="sm:hidden">
           <button onClick={toggleNavbar}>
             {isOpen ? <IoMdClose /> : <IoIosMenu />}
           </button>
