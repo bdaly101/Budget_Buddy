@@ -1,10 +1,10 @@
 import React, { useState } from 'react';
 import { useParams, Navigate } from 'react-router-dom';
 import { useQuery } from '@apollo/client';
-import { QUERY_USER, QUERY_ME } from '../utils/queries';
+import { QUERY_ME } from '../utils/queries';
 import Auth from '../utils/auth';
 
-const BudgetPage = () => {
+const Budget = () => {
   // Extract the username parameter from the URL
   const { username: userParam } = useParams();
 
@@ -58,7 +58,7 @@ const BudgetPage = () => {
         <input
           type="text"
           id="savingGoal"
-          value={/* Saving goal value */}
+          value= "10"
           readOnly={!editMode} // Allow editing only in edit mode
         />
 
@@ -66,7 +66,7 @@ const BudgetPage = () => {
         <input
           type="text"
           id="moneyAvailable"
-          value={/* Money available value */}
+          value="10"
           readOnly={!editMode}
         />
 
@@ -74,19 +74,9 @@ const BudgetPage = () => {
         <input
           type="text"
           id="budget"
-          value={/* Budget value */}
+          value="10"
           readOnly={!editMode}
         />
-
-        <label htmlFor="expensesImportance">Show expenses with importance:</label>
-        <select
-          id="expensesImportance"
-          value={/* Selected importance level */}
-          disabled={!editMode} // Disable selection when not in edit mode
-        >
-          <option value="low">Low</option>
-          {/* Add other importance levels as needed */}
-        </select>
 
         {/* Save changes button in edit mode */}
         {editMode && (
@@ -97,4 +87,4 @@ const BudgetPage = () => {
   );
 };
 
-export default BudgetPage;
+export default Budget;

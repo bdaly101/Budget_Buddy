@@ -1,10 +1,13 @@
 import { useState } from 'react';
 import { Button, Checkbox, Label, TextInput, Alert } from 'flowbite-react';
-import Link from 'next/link';
-import { createUser } from '../utils/API';
+//import Link from 'next/link';
+import { ADD_USER } from '../utils/mutations';
+import { useMutation } from '@apollo/client';
 import Auth from '../utils/auth';
 
 const SignupForm = () => {
+
+  const [addUser, { error, data }] = useMutation(ADD_USER);
   // set initial form state
   const [userFormData, setUserFormData] = useState({ username: '', email: '', password: '' });
   // set state for form validation

@@ -27,7 +27,6 @@ const PurchaseForm = () => {
       if (addToExisting && selectedExpenseId) {
         await addPurchase({
           variables: {
-            importance: purchaseText,
             expenseId: selectedExpenseId,
           },
         });
@@ -43,7 +42,6 @@ const PurchaseForm = () => {
         if (expenseData) {
           await addPurchase({
             variables: {
-              importance: purchaseText,
               expenseId: expenseData.createExpense._id,
             },
           });
