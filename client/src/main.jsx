@@ -1,10 +1,11 @@
 import ReactDOM from 'react-dom/client'
 import { createBrowserRouter, RouterProvider } from 'react-router-dom'
+import Header from './components/Header.jsx'
 
 import App from './App.jsx'
 import HomePage from './pages/HomePage';
-import Signup from './pages/Signup';
-import Login from './pages/Login';
+import Signup from './components/SignupForm';
+import Login from './components/LoginForm.jsx';
 import Budget from './pages/Budget';
 import Profile from './pages/Profile';
 import Expenses from './pages/Expenses';

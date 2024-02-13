@@ -9,12 +9,10 @@ const Budget = () => {
   const { username: userParam } = useParams();
 
   // Fetch user data based on the username parameter using Apollo Client's useQuery hook
-  const { loading, data } = useQuery(userParam ? QUERY_USER : QUERY_ME, {
-    variables: { username: userParam },
-  });
+  const { loading, data } = useQuery(QUERY_ME);
 
   // Destructure user data from the query result
-  const user = data?.me || data?.user || {};
+  const user = data?.me || {};
 
   // State for controlling edit mode
   const [editMode, setEditMode] = useState(false);
@@ -54,6 +52,7 @@ const Budget = () => {
 
       {/* Budget form section */}
       <div className="budget-form">
+
         <label htmlFor="savingGoal">Saving goal:</label>
         <input
           type="text"
@@ -78,6 +77,7 @@ const Budget = () => {
           readOnly={!editMode}
         />
 
+
         {/* Save changes button in edit mode */}
         {editMode && (
           <button onClick={() => setEditMode(false)}>Save Changes</button>
@@ -87,4 +87,6 @@ const Budget = () => {
   );
 };
 
+
 export default Budget;
+
