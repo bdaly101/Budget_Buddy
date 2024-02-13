@@ -1,4 +1,6 @@
-import { Navigate, useParams } from 'react-router-dom';
+
+import React, { useState } from 'react';
+import { useParams, Navigate } from 'react-router-dom';
 import { useQuery } from '@apollo/client';
 
 import { QUERY_USER, QUERY_ME } from '../utils/queries';
@@ -6,22 +8,37 @@ import { QUERY_USER, QUERY_ME } from '../utils/queries';
 import Auth from '../utils/auth';
 
 const Profile = () => {
+  // Extract the username parameter from the URL
   const { username: userParam } = useParams();
+
+
+  // Fetch user data based on the username parameter using Apollo Client's useQuery hook
 
   const { loading, data } = useQuery(userParam ? QUERY_USER : QUERY_ME, {
     variables: { username: userParam },
   });
 
+  // Destructure user data from the query result
   const user = data?.me || data?.user || {};
+
   // navigate to personal profile page if username is yours
+
+
+  // State for controlling edit mode
+  const [editMode, setEditMode] = useState(false);
+
+  // Redirect to the personal profile page if the logged-in user is viewing their own profile
+
   if (Auth.loggedIn() && Auth.getProfile().data.username === userParam) {
     return <Navigate to="/me" />;
   }
 
+  // Display a loading message while fetching data
   if (loading) {
     return <div>Loading...</div>;
   }
 
+  // If the user is not logged in or the queried user doesn't exist, display a message
   if (!user?.username) {
     return (
       <h4>
@@ -32,27 +49,35 @@ const Profile = () => {
   }
 
   return (
-    <div>
-      <div className="flex-row justify-center mb-3">
-        <h2 className="col-12 col-md-10 bg-dark text-light p-3 mb-5">
+
+    <div className="profile-container">
+      {/* Profile header section */}
+      <div className="profile-header">
+        <h2>
           Viewing {userParam ? `${user.username}'s` : 'your'} profile.
         </h2>
-
-        <div className="col-12 col-md-10 mb-5">
-          <ThoughtList
-            thoughts={user.thoughts}
-            title={`${user.username}'s thoughts...`}
-            showTitle={false}
-            showUsername={false}
-          />
-        </div>
+        {/* Button to toggle edit mode */}
         {!userParam && (
-          <div
-            className="col-12 col-md-10 mb-3 p-3"
-            style={{ border: '1px dotted #1a1a1a' }}
-          >
-            <ThoughtForm />
+          <button onClick={() => setEditMode(true)}>Edit Information</button>
+        )}
+      </div>
+
+      {/* Profile information section */}
+      <div className="profile-info">
+        <p>Username: {user.username}</p>
+        <p>First Name: {user.firstName}</p>
+        <p>Last Name: {user.lastName}</p>
+        <p>Email: {user.email}</p>
+        {/* Password input and save button in edit mode */}
+        {editMode && (
+          <div>
+            <label htmlFor="password">Password: </label>
+            <input type="password" id="password" />
+
           </div>
+        )}
+        {editMode && (
+          <button onClick={() => setEditMode(false)}>Save Changes</button> //save changes button
         )}
       </div>
     </div>
