@@ -1,14 +1,19 @@
+
 import React, { useState } from 'react';
 import { useParams, Navigate } from 'react-router-dom';
 import { useQuery } from '@apollo/client';
+
 import { QUERY_USER, QUERY_ME } from '../utils/queries';
+
 import Auth from '../utils/auth';
 
 const Profile = () => {
   // Extract the username parameter from the URL
   const { username: userParam } = useParams();
 
+
   // Fetch user data based on the username parameter using Apollo Client's useQuery hook
+
   const { loading, data } = useQuery(userParam ? QUERY_USER : QUERY_ME, {
     variables: { username: userParam },
   });
@@ -16,10 +21,14 @@ const Profile = () => {
   // Destructure user data from the query result
   const user = data?.me || data?.user || {};
 
+  // navigate to personal profile page if username is yours
+
+
   // State for controlling edit mode
   const [editMode, setEditMode] = useState(false);
 
   // Redirect to the personal profile page if the logged-in user is viewing their own profile
+
   if (Auth.loggedIn() && Auth.getProfile().data.username === userParam) {
     return <Navigate to="/me" />;
   }
@@ -40,6 +49,7 @@ const Profile = () => {
   }
 
   return (
+
     <div className="profile-container">
       {/* Profile header section */}
       <div className="profile-header">
@@ -63,6 +73,7 @@ const Profile = () => {
           <div>
             <label htmlFor="password">Password: </label>
             <input type="password" id="password" />
+
           </div>
         )}
         {editMode && (
