@@ -8,8 +8,7 @@ export const QUERY_ME = gql`
       firstName
       lastName
       email
-      money
-      goal
+      budget
       expenses {
         _id
         name

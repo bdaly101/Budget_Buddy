@@ -1,6 +1,6 @@
 export const Logo = () => {
     return (
-      <image src="client/src/assets/images/webImages/BudgetBuddy-Logo.png"></image>
+      <img src="client/src/assets/images/webImages/BudgetBuddy-Logo.png"></img>
     );
   };
   

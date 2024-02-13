@@ -28,11 +28,7 @@ const userSchema = new Schema(
       type: String,
       required: true,
     },
-    money: {
-      type: Number, 
-      required: true,
-    },
-    goal: {
+    budget: {
       type: Number, 
       required: true,
     },
