@@ -1,54 +1,100 @@
-import { useParams } from 'react-router-dom';
+import React, { useState } from 'react';
+import { useParams, Navigate } from 'react-router-dom';
 import { useQuery } from '@apollo/client';
+import { QUERY_USER, QUERY_ME } from '../utils/queries';
+import Auth from '../utils/auth';
 
+const BudgetPage = () => {
+  // Extract the username parameter from the URL
+  const { username: userParam } = useParams();
 
-
-import { QUERY_SINGLE_THOUGHT } from '../utils/queries';
-
-const SingleThought = () => {
-  // Use `useParams()` to retrieve value of the route parameter `:profileId`
-  const { thoughtId } = useParams();
-
-  const { loading, data } = useQuery(QUERY_SINGLE_THOUGHT, {
-    // pass URL parameter
-    variables: { thoughtId: thoughtId },
+  // Fetch user data based on the username parameter using Apollo Client's useQuery hook
+  const { loading, data } = useQuery(userParam ? QUERY_USER : QUERY_ME, {
+    variables: { username: userParam },
   });
 
-  const thought = data?.thought || {};
+  // Destructure user data from the query result
+  const user = data?.me || data?.user || {};
 
+  // State for controlling edit mode
+  const [editMode, setEditMode] = useState(false);
+
+  // Redirect to the personal profile page if the logged-in user is viewing their own profile
+  if (Auth.loggedIn() && Auth.getProfile().data.username === userParam) {
+    return <Navigate to="/me" />;
+  }
+
+  // Display a loading message while fetching data
   if (loading) {
     return <div>Loading...</div>;
   }
+
+  // If the user is not logged in or the queried user doesn't exist, display a message
+  if (!user?.username) {
+    return (
+      <h4>
+        You need to be logged in to see this. Use the navigation links above to
+        sign up or log in!
+      </h4>
+    );
+  }
+
   return (
-    <div className="my-3">
-      <h3 className="card-header bg-dark text-light p-2 m-0">
-        {thought.thoughtAuthor} <br />
-        <span style={{ fontSize: '1rem' }}>
-          had this thought on {thought.createdAt}
-        </span>
-      </h3>
-      <div className="bg-light py-4">
-        <blockquote
-          className="p-4"
-          style={{
-            fontSize: '1.5rem',
-            fontStyle: 'italic',
-            border: '2px dotted #1a1a1a',
-            lineHeight: '1.5',
-          }}
-        >
-          {thought.thoughtText}
-        </blockquote>
+    <div className="budget-container">
+      {/* Budget header section */}
+      <div className="budget-header">
+        <h2>
+          Viewing {userParam ? `${user.username}'s` : 'your'} budget.
+        </h2>
+        {/* Button to toggle edit mode */}
+        {!userParam && (
+          <button onClick={() => setEditMode(true)}>Edit Budget</button>
+        )}
       </div>
 
-      <div className="my-5">
-        <CommentList comments={thought.comments} />
-      </div>
-      <div className="m-3 p-4" style={{ border: '1px dotted #1a1a1a' }}>
-        <CommentForm thoughtId={thought._id} />
+      {/* Budget form section */}
+      <div className="budget-form">
+        <label htmlFor="savingGoal">Saving goal:</label>
+        <input
+          type="text"
+          id="savingGoal"
+          value={/* Saving goal value */}
+          readOnly={!editMode} // Allow editing only in edit mode
+        />
+
+        <label htmlFor="moneyAvailable">Money available:</label>
+        <input
+          type="text"
+          id="moneyAvailable"
+          value={/* Money available value */}
+          readOnly={!editMode}
+        />
+
+        <label htmlFor="budget">Budget: Spending - Saving</label>
+        <input
+          type="text"
+          id="budget"
+          value={/* Budget value */}
+          readOnly={!editMode}
+        />
+
+        <label htmlFor="expensesImportance">Show expenses with importance:</label>
+        <select
+          id="expensesImportance"
+          value={/* Selected importance level */}
+          disabled={!editMode} // Disable selection when not in edit mode
+        >
+          <option value="low">Low</option>
+          {/* Add other importance levels as needed */}
+        </select>
+
+        {/* Save changes button in edit mode */}
+        {editMode && (
+          <button onClick={() => setEditMode(false)}>Save Changes</button>
+        )}
       </div>
     </div>
   );
 };
 
-export default SingleThought;
+export default BudgetPage;
