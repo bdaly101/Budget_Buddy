@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { useParams, Navigate } from 'react-router-dom';
 import { useQuery } from '@apollo/client';
-import { QUERY_USER, QUERY_ME } from '../utils/queries';
+import { QUERY_ME } from '../utils/queries';
 import Auth from '../utils/auth';
 
 const BudgetPage = () => {
@@ -9,12 +9,10 @@ const BudgetPage = () => {
   const { username: userParam } = useParams();
 
   // Fetch user data based on the username parameter using Apollo Client's useQuery hook
-  const { loading, data } = useQuery(userParam ? QUERY_USER : QUERY_ME, {
-    variables: { username: userParam },
-  });
+  const { loading, data } = useQuery(QUERY_ME);
 
   // Destructure user data from the query result
-  const user = data?.me || data?.user || {};
+  const user = data?.me || {};
 
   // State for controlling edit mode
   const [editMode, setEditMode] = useState(false);
@@ -54,39 +52,7 @@ const BudgetPage = () => {
 
       {/* Budget form section */}
       <div className="budget-form">
-        <label htmlFor="savingGoal">Saving goal:</label>
-        <input
-          type="text"
-          id="savingGoal"
-          value={/* Saving goal value */}
-          readOnly={!editMode} // Allow editing only in edit mode
-        />
-
-        <label htmlFor="moneyAvailable">Money available:</label>
-        <input
-          type="text"
-          id="moneyAvailable"
-          value={/* Money available value */}
-          readOnly={!editMode}
-        />
-
-        <label htmlFor="budget">Budget: Spending - Saving</label>
-        <input
-          type="text"
-          id="budget"
-          value={/* Budget value */}
-          readOnly={!editMode}
-        />
-
-        <label htmlFor="expensesImportance">Show expenses with importance:</label>
-        <select
-          id="expensesImportance"
-          value={/* Selected importance level */}
-          disabled={!editMode} // Disable selection when not in edit mode
-        >
-          <option value="low">Low</option>
-          {/* Add other importance levels as needed */}
-        </select>
+        {/* Your input fields and select options here */}
 
         {/* Save changes button in edit mode */}
         {editMode && (
