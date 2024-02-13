@@ -27,6 +27,8 @@ const Home = () => {
       <>
       <p>Viewing {userParam ? `${user.username}'s` : 'your'} profile</p>
       <p>Money left in budget: {user.budget}</p>
+      <p>Top Expenses:</p>
+      <p>Recent Purchases:</p>
     </>
   );
 

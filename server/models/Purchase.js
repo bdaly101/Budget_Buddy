@@ -3,11 +3,6 @@ const dateFormat = require('../utils/dateFormat');
 
 // Define the schema for the Purchase model
 const purchaseSchema = new Schema({
-  // Define the importance field with specific allowed values
-  importance: {
-    type: String,
-    enum: ['low', 'medium', 'high'], // Correctly specify the allowed values for the importance field
-  },
   cost: {
     type: Number,
     required: true, // Assuming every purchase must have a cost

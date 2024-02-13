@@ -14,7 +14,7 @@ export const QUERY_ME = gql`
         name
         purchases {
           _id
-          importance
+          cost
           createdAt
         }
       }
@@ -26,7 +26,7 @@ export const QUERY_PURCHASES = gql`
   query purchases {
     getPurchases {
       _id
-      importance
+      cost
       createdAt
     }
   }
@@ -39,7 +39,7 @@ export const QUERY_EXPENSES = gql`
       name
       purchases {
         _id
-        importance
+        cost
         createdAt
       }
     }
@@ -53,7 +53,7 @@ export const QUERY_EXPENSE_BY_ID = gql`
       name
       purchases {
         _id
-        importance
+        cost
         createdAt
       }
     }
@@ -65,7 +65,7 @@ export const QUERY_PURCHASE_BY_ID = gql`
   query purchaseById($id: ID!) {
     getPurchaseById(id: $id) {
       _id
-      importance
+      cost
       createdAt
     }
   }

@@ -64,8 +64,8 @@ const resolvers = {
       await User.findByIdAndUpdate(userId, { $push: { expenses: expense._id } });
       return expense;
     },
-    addPurchase: async (parent, { importance, expenseId }) => {
-      const purchase = await Purchase.create({ importance, expense: expenseId });
+    addPurchase: async (parent, { cost, expenseId }) => {
+      const purchase = await Purchase.create({ cost, expense: expenseId });
       await Expense.findByIdAndUpdate(expenseId, { $push: { purchases: purchase._id } });
       return purchase;
     },
@@ -75,8 +75,8 @@ const resolvers = {
     updateExpense: async (parent, { id, name }) => {
       return Expense.findByIdAndUpdate(id, { name }, { new: true });
     },
-    updatePurchase: async (parent, { id, importance }) => {
-      return Purchase.findByIdAndUpdate(id, { importance }, { new: true });
+    updatePurchase: async (parent, { id, cost }) => {
+      return Purchase.findByIdAndUpdate(id, { cost }, { new: true });
     },
     deleteUser: async (parent, { id }) => {
       return User.findByIdAndDelete(id);

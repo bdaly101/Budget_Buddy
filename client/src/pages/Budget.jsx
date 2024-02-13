@@ -4,7 +4,7 @@ import { useQuery } from '@apollo/client';
 import { QUERY_ME } from '../utils/queries';
 import Auth from '../utils/auth';
 
-const BudgetPage = () => {
+const Budget = () => {
   // Extract the username parameter from the URL
   const { username: userParam } = useParams();
 
@@ -52,7 +52,31 @@ const BudgetPage = () => {
 
       {/* Budget form section */}
       <div className="budget-form">
-        {/* Your input fields and select options here */}
+
+        <label htmlFor="savingGoal">Saving goal:</label>
+        <input
+          type="text"
+          id="savingGoal"
+          value= "10"
+          readOnly={!editMode} // Allow editing only in edit mode
+        />
+
+        <label htmlFor="moneyAvailable">Money available:</label>
+        <input
+          type="text"
+          id="moneyAvailable"
+          value="10"
+          readOnly={!editMode}
+        />
+
+        <label htmlFor="budget">Budget: Spending - Saving</label>
+        <input
+          type="text"
+          id="budget"
+          value="10"
+          readOnly={!editMode}
+        />
+
 
         {/* Save changes button in edit mode */}
         {editMode && (
@@ -63,4 +87,6 @@ const BudgetPage = () => {
   );
 };
 
-export default BudgetPage;
+
+export default Budget;
+

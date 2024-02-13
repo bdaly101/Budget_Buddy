@@ -32,17 +32,18 @@ export const CREATE_EXPENSE = gql`
       name
       purchases {
         _id
-        importance
+        cost
+        createdAt
       }
     }
   }
 `;
 
 export const ADD_PURCHASE = gql`
-  mutation addPurchase($importance: String!, $expenseId: ID!) {
-    addPurchase(importance: $importance, expenseId: $expenseId) {
+  mutation addPurchase($cost: Float!, $expenseId: ID!) {
+    addPurchase(cost: $cost, expenseId: $expenseId) {
       _id
-      importance
+      cost
       createdAt
     }
   }
@@ -68,10 +69,10 @@ export const UPDATE_EXPENSE = gql`
 `;
 
 export const UPDATE_PURCHASE = gql`
-  mutation updatePurchase($id: ID!, $importance: String!) {
-    updatePurchase(id: $id, importance: $importance) {
+  mutation updatePurchase($id: ID!, $cost: Float!) {
+    updatePurchase(id: $id, cost: $cost) {
       _id
-      importance
+      cost
     }
   }
 `;
