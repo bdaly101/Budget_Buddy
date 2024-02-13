@@ -20,8 +20,7 @@ const typeDefs = `
     lastName: String!
     email: String!
     password: String!
-    money: Float!
-    goal: Float!
+    budget: Float!
     expenses: [Expense]
   }
 
@@ -41,11 +40,11 @@ const typeDefs = `
   }
 
   type Mutation {
-    addUser(username: String!, firstName: String!, lastName: String!, email: String!, password: String!, money: Float!, goal: Float!): User
+    addUser(username: String!, firstName: String!, lastName: String!, email: String!, password: String!, budget: Float!): User
     login(email: String!, password: String!): Auth
     createExpense(name: String!, userId: ID!): Expense
     addPurchase(importance: String!, expenseId: ID!): Purchase
-    updateUser(id: ID!, username: String, firstName: String, lastName: String, email: String, password: String, money: Float, goal: Float): User
+    updateUser(id: ID!, username: String, firstName: String, lastName: String, email: String, password: String, budget: Float): User
     updateExpense(id: ID!, name: String!): Expense
     updatePurchase(id: ID!, importance: String!): Purchase
     deleteUser(id: ID!): User

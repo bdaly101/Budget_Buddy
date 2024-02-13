@@ -1,8 +1,8 @@
 import { gql } from '@apollo/client';
 
 export const ADD_USER = gql`
-  mutation addUser($username: String!, $firstName: String!, $lastName: String!, $email: String!, $password: String!, $money: Float!, $goal: Float!) {
-    addUser(username: $username, firstName: $firstName, lastName: $lastName, email: $email, password: $password, money: $money, goal: $goal) {
+  mutation addUser($username: String!, $firstName: String!, $lastName: String!, $email: String!, $budget: Float!) {
+    addUser(username: $username, firstName: $firstName, lastName: $lastName, email: $email, password: $password, budget: $budget) {
       token
       user {
         _id
@@ -49,12 +49,11 @@ export const ADD_PURCHASE = gql`
 `;
 
 export const UPDATE_USER = gql`
-  mutation updateUser($id: ID!, $username: String, $firstName: String, $lastName: String, $email: String, $password: String, $money: Float, $goal: Float) {
-    updateUser(id: $id, username: $username, firstName: $firstName, lastName: $lastName, email: $email, password: $password, money: $money, goal: $goal) {
+  mutation updateUser($id: ID!, $username: String, $firstName: String, $lastName: String, $email: String, $password: String, $budget: Float) {
+    updateUser(id: $id, username: $username, firstName: $firstName, lastName: $lastName, email: $email, password: $password, budget: $budget) {
       _id
       username
-      money
-      goal
+      budget
     }
   }
 `;
