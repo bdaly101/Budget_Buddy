@@ -3,9 +3,14 @@ import { createBrowserRouter, RouterProvider } from 'react-router-dom'
 import Header from './components/Header.jsx'
 
 import App from './App.jsx'
+import HomePage from './pages/HomePage';
+import Signup from './pages/Signup';
+import Login from './pages/Login';
+import Budget from './pages/Budget';
+import Profile from './pages/Profile';
+import Expenses from './pages/Expenses';
+import SingleExpense from './pages/SingleExpense';
 
-import HomePage from './pages/HomePage'
-import Profile from './pages/Profile.jsx'
 
 
 const router = createBrowserRouter([
@@ -17,11 +22,24 @@ const router = createBrowserRouter([
       {
         index: true,
         element: <HomePage />
-
       }, {
-        path: '/saved',
+        path: '/login',
+        element: <Login />
+      }, {
+        path: '/signup',
+        element: <Signup />
+      }, {
+        path: '/me',
         element: <Profile />
-
+      }, {
+        path: '/budget',
+        element: <Budget />
+      }, {
+        path: '/expenses',
+        element: <Expenses />
+      }, {
+        path: '/expenses/:expenseID',
+        element: <SingleExpense />
       }
     ]
   }
