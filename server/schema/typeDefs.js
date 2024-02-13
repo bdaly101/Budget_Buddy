@@ -37,6 +37,7 @@ const typeDefs = `
     getExpenseById(id: ID!): Expense
     getPurchases: [Purchase]
     getPurchaseById(id: ID!): Purchase
+    me: User
   }
 
   type Mutation {
