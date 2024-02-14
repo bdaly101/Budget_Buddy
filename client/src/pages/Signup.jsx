@@ -1,5 +1,6 @@
+"use client";
 import { useState } from 'react';
-import { Button, Label, TextInput } from 'flowbite-react';
+import { Button, Label } from 'flowbite-react';
 import { useMutation } from '@apollo/client';
 import { ADD_USER } from '../utils/mutations'; 
 import Auth from '../utils/auth';
@@ -39,11 +40,7 @@ const Signup = () => {
       // Handle error or show alert
     }
 
-    setUserFormData({
-      username: '',
-      email: '',
-      password: '',
-    });
+    
   };
 
   return (
@@ -55,22 +52,25 @@ const Signup = () => {
       <div className="mt-10 sm:mx-auto sm:w-full sm:max-w-sm">
         <form className="space-y-6" onSubmit={handleFormSubmit}>
           <div>
-            <div className="">
-              <Label className='block text-sm font-medium leading-6' htmlFor="username1" value="Username" />
-            </div>
-            <input className='block w-full rounded-md border-0 py-1.5' id="username1"
-              type="username"
-              placeholder=""
+            <Label className='block text-sm font-medium leading-6' htmlFor="username1" value="username" />
+            <input 
+              className='block w-full rounded-md py-1.5' 
+              id="username1"
+              name="username"
+              type="text"
+              placeholder="username"
               required
               value={userFormData.username}
               onChange={handleInputChange}
             />
           </div>
           <div>
-            <div className="flex items-center justify-between">
-              <Label className='block text-sm font-medium leading-6' htmlFor="email1" value="Your email" />
-            </div>
-            <input className='block w-full rounded-md border-0 py-1.5' id="email1"
+            
+            <Label className='block text-sm font-medium leading-6' htmlFor="email1" value="Your email" />
+            <input 
+              className='block w-full rounded-md' 
+              id="email1"
+              name="email"
               type="email"
               placeholder="yourname@email.com"
               required
@@ -81,32 +81,31 @@ const Signup = () => {
             
           </div>
           <div>
-            <div className="flex items-center justify-between">
-              <Label className='block text-sm font-medium leading-6' htmlFor="password1" value="Your password" />
-            </div>
-            <input className='block w-full rounded-md border-0 py-1.5 shadow-sm focus:ring-2 focus:ring-inset focus:ring-[#3b7cae]' id="password1" type="password" 
+            
+            <Label className='block text-sm font-medium leading-6' htmlFor="password1" value="Your password" />
+            <input 
+              className='block w-full rounded-md shadow-sm focus:ring-2 focus:ring-inset focus:ring-[#3b7cae]' 
+              id="password1" 
+              name="password"
+              type="password" 
               required
               value={userFormData.password}
               onChange={handleInputChange}
             />
           </div>
-          <div>
-            <div className="flex items-center justify-between">
-              <Label className='block text-sm font-medium leading-6' htmlFor="confirmpass1" value="Re-enter password" />
-            </div>
-            <input className='block w-full rounded-md border-0 py-1.5 shadow-sm focus:ring-2 focus:ring-inset focus:ring-[#3b7cae]' id="confirmpass1" type="password" 
-              required
-            />
-          </div>
           <Button className='flex w-full mb-1 justify-center rounded-md px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-[#3b7cae] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 bg-[#2b5b88]'
             // disabled={!(userFormData.email && userFormData.password)}
             type='submit'
-            variant='success'>
+            variant='success'
+            >
             Create New Account
           </Button>
-          Already have an Account?
-          <Link to="/login" className="font-semibold ml-1 leading-6 text-[#2b5b88] hover:text-[#3b7cae]">Log In</Link>
+          <div className='mt-10 text-center text-sm'>
+            Already have an Account?
+            <Link to="/login" className="font-semibold ml-1 leading-6 text-[#2b5b88] hover:text-[#3b7cae]">Log In</Link>
+          </div>  
         </form>
+        {error && <div className="mt-4 text-center text-sm text-red-600">{error.message}</div>}
       </div>
     </main>
   );
