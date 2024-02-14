@@ -20,7 +20,7 @@ const userSchema = new Schema(
     },
     budget: {
       type: Number, 
-      required: true,
+      required: false,
     },
     expenses: [
       {
