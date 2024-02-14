@@ -57,9 +57,9 @@ const SignupForm = () => {
       {/* This is needed for the validation functionality above */}
       <form className="flex max-w-md flex-col gap-4" noValidate validated={validated} onSubmit={handleFormSubmit}>
         {/* show alert if server response is bad */}
-        <Alert color="failure" onDismiss={() => alert('Alert dismissed!')} icon={IoIosAlert}>
+        {/* <Alert color="failure" onDismiss={() => alert('Alert dismissed!')} icon={IoIosAlert}>
           Something went wrong, please try again.
-        </Alert>
+        </Alert> */}
         <Form.Group className='mb-3'>
           <Form.Label htmlFor='username'>Username</Form.Label>
           <Form.Control
