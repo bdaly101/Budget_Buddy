@@ -1,6 +1,6 @@
 const { User, Expense, Purchase } = require('../models');
-const { signToken, AuthenticationError } = require('../utils/auth');
-
+const { signToken } = require('../utils/auth');
+const { AuthenticationError } = require('apollo-server-express');
 async function calculateSpendingForPeriod(userId, startDate, endDate) {
   const query = { user: userId };
   if (startDate && endDate) {
@@ -35,15 +35,21 @@ const resolvers = {
       if (context.user) {
         return User.findOne({ _id: context.user._id }).populate('thoughts');
       }
-      throw AuthenticationError;
+      throw new AuthenticationError;
     },
   },
 
   Mutation: {
     addUser: async (parent, args) => {
-      const user = await User.create(args);
-      const token = signToken(user);
-      return { token, user };
+      try {
+        
+        const user = await User.create({...args});
+        console.log(user)
+        const token = signToken(user);
+        return { token, user };
+      } catch (error) {
+        console.log(error);
+      }
     },
     login: async (parent, { email, password }) => {
       const user = await User.findOne({ email });

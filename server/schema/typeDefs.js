@@ -15,12 +15,12 @@ const typeDefs = `
 
   type User {
     _id: ID!
-    username: String!
-    firstName: String!
-    lastName: String!
-    email: String!
-    password: String!
-    budget: Float!
+    username: String
+    firstName: String
+    lastName: String
+    email: String
+    password: String
+    budget: Float
     expenses: [Expense]
   }
 
@@ -40,7 +40,7 @@ const typeDefs = `
   }
 
   type Mutation {
-    addUser(username: String!, firstName: String!, lastName: String!, email: String!, password: String!, budget: Float!): User
+    addUser(username: String!, firstName: String!, lastName: String!, email: String!, password: String!, budget: Float!): Auth
     login(email: String!, password: String!): Auth
     createExpense(name: String!, userId: ID!): Expense
     addPurchase(cost: Float!, expenseId: ID!): Purchase
