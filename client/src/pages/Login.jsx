@@ -6,11 +6,12 @@ import { useState } from 'react';
 import { LOGIN_USER } from '../utils/mutations';
 import { useMutation } from '@apollo/client';
 import Auth from '../utils/auth';
+import { Link, useNavigate } from 'react-router-dom'; // Import Link and useNavigate
 
 const LoginForm = () => {
   const [formState, setFormState] = useState({ email: '', password: '' });
   const [login, { error, data }] = useMutation(LOGIN_USER);
-
+  const navigate = useNavigate(); // Initialize the useNavigate hook
   // update state based on form input changes
   const handleChange = (event) => {
     const { name, value } = event.target;
@@ -31,6 +32,7 @@ const LoginForm = () => {
       });
 
       Auth.login(data.login.token);
+      navigate('/homepage'); // Redirect user to the homepage
     } catch (e) {
       console.error(e);
     }
@@ -78,6 +80,9 @@ const LoginForm = () => {
                 >
                   Submit
                 </button>
+                <p className="mt-2">
+                  Don't have an account? <Link to="/signup">Sign up</Link>
+                </p>
               </form>
             )}
 
