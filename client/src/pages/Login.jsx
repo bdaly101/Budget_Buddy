@@ -78,9 +78,6 @@ const LoginForm = () => {
           </div>
         </form>
         {error && <div className="mt-4 text-center text-sm text-red-600">{error.message}</div>}
-        <p className="mt-4 text-center">
-          Don't have an account? <Link to="/signup" className="text-indigo-600 hover:text-indigo-500">Sign up</Link>
-        </p>
       </div>
     </main>
   );
