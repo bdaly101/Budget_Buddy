@@ -5,9 +5,9 @@ import { useState } from "react";
 const NavLinks = () => {
   return (
   <>
-    <NavLink to="#">Budget</NavLink>
-    <NavLink to="#">Expenses</NavLink>
-    <NavLink to="#">Sign Up/Login</NavLink>
+    <NavLink to="/budget">Budget</NavLink>
+    <NavLink to="/expenses">Expenses</NavLink>
+    <NavLink to="/login">Login</NavLink>
   </>
   );
 };
