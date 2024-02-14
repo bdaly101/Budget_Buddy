@@ -1,7 +1,7 @@
 "use client";
 // see SignupForm.js for comments
 import { useState } from 'react';
-//import { Button, Checkbox, Label, TextInput, Alert } from 'flowbite-react';
+import { Button, Checkbox, Label, TextInput, Alert } from 'flowbite-react';
 //import { IoIosAlert } from "react-icons/io";
 import { LOGIN_USER } from '../utils/mutations';
 import { useMutation } from '@apollo/client';
@@ -44,53 +44,46 @@ const LoginForm = () => {
     });
   };
 
+  const isFormValid = formState.email && formState.password;
+
   return (
     <main className="flex min-h-full flex-col justify-center px-6 py-12 lg:px-8 mt-6">
-      <div className="sm:mx-auto sm:w-full sm:max-w-sm">
-        <img className="h-12 w-auto" src="/src/assets/images/webImages/BudgetBuddy-Logo.png"></img>
+      <div className="sm:mx-auto sm:w-full sm:max-w-md">
+        <img className="h-12 w-auto" src="/src/assets/images/webImages/BudgetBuddy-Logo.png" alt="Budget Buddy Logo" />
         <h2 className="mt-10 text-center text-2xl leading-9 tracking-tight">Sign in to your account</h2>
       </div>
-      <div className="mt-10 sm:mx-auto sm:w-full sm:max-w-sm">
-        <form className="space-y-6" noValidate validated={validated} onSubmit={handleFormSubmit}>
-          {/* <Alert color="failure" onDismiss={() => alert('Alert dismissed!')} icon={IoIosAlert}>
-            Something went wrong, please try again.
-          </Alert> */}
+      <div className="mt-8 sm:mx-auto sm:w-full sm:max-w-md">
+        <form className="space-y-6" noValidate onSubmit={handleFormSubmit}>
           <div>
-            <div>
-              <Label className='block text-sm font-medium leading-6' htmlFor="email1" value="Your email" />
-            </div>
-            <TextInput className='block w-full rounded-md border-0 py-1.5' id="email1"
+            <TextInput
+              id="email"
               type="email"
-              placeholder="yourname@email.com"
-              onChange={handleInputChange}
-              value={userFormData.email}
+              name="email"
+              placeholder="Your email"
+              onChange={handleChange}
+              value={formState.email}
               required
+              className="block w-full rounded-md"
             />
           </div>
           <div>
-            <div className="flex items-center justify-between">
-              <Label className='block text-sm font-medium leading-6' htmlFor="password1" value="Your password" />
-            </div>
-            <TextInput className='block w-full rounded-md border-0 py-1.5 shadow-sm focus:ring-2 focus:ring-inset focus:ring-[#3b7cae]' id="password1" type="password" 
-              onChange={handleInputChange}
-              value={userFormData.password}
+            <TextInput
+              id="password"
+              type="password"
+              name="password"
+              placeholder="Your password"
+              onChange={handleChange}
+              value={formState.password}
               required
+              className="block w-full rounded-md"
             />
-            <div class="text-sm">
-            <a href="#" class="font-semibold text-[#2b5b88] hover:text-[#3b7cae]">Forgot password?</a>
-            </div>
           </div>
-          <div className="flex items-center gap-2">
-            <Checkbox className="rounded-sm active:bg-[#2b5b88]" id="remember" />
-            <Label htmlFor="remember">Remember me</Label>
-          </div>
-          <Button className='flex w-full justify-center rounded-md px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-[#3b7cae] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 bg-[#2b5b88]'
-            // disabled={!(userFormData.email && userFormData.password)}
-            type='submit'
-            variant='success'>
-            Submit
-          </Button>
+          <Button type="submit" className="w-full rounded-md bg-blue-500 text-gray-700">Submit</Button> {/* Changed text color to dark grey */}
         </form>
+        {error && <div className="mt-4 text-center text-sm text-red-600">{error.message}</div>}
+        <p className="mt-4 text-center">
+          Don't have an account? <Link to="/signup" className="text-indigo-600 hover:text-indigo-500">Sign up</Link>
+        </p>
       </div>
     </main>
   );
