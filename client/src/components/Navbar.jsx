@@ -23,10 +23,10 @@ const Nav = () => {
   return (
     <>
       <nav className=" flex w-1/3 justify-end">
-        <div className="w-full justify-between md:flex">
-          <NavLink />
+        <div className="hidden w-full justify-between md:flex">
+          <NavLinks />
         </div>
-        <div className="sm:hidden text-blue-500 w-10 h-auto">
+        <div className="md:hidden text-[#2b5b88] w-10 h-auto">
           <button onClick={toggleNavbar}>
             {isOpen ? <IoMdClose /> : <IoIosMenu />}
           </button>

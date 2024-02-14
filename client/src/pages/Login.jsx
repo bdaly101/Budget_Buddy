@@ -45,54 +45,52 @@ const LoginForm = () => {
   };
 
   return (
-    <main className="flex-row justify-center mb-4">
-      <div className="col-12 col-lg-10">
-        <div className="card">
-          <h4 className="card-header bg-dark text-light p-2">Login</h4>
-          <div className="card-body">
-            {data ? (
-              <p>
-                Success! You may now head{' '}
-                <Link to="/">back to the homepage.</Link>
-              </p>
-            ) : (
-              <form onSubmit={handleFormSubmit}>
-                <input
-                  className="form-input"
-                  placeholder="Your email"
-                  name="email"
-                  type="email"
-                  value={formState.email}
-                  onChange={handleChange}
-                />
-                <input
-                  className="form-input"
-                  placeholder="******"
-                  name="password"
-                  type="password"
-                  value={formState.password}
-                  onChange={handleChange}
-                />
-                <button
-                  className="btn btn-block btn-primary"
-                  style={{ cursor: 'pointer' }}
-                  type="submit"
-                >
-                  Submit
-                </button>
-                <p className="mt-2">
-                  Don't have an account? <Link to="/signup">Sign up</Link>
-                </p>
-              </form>
-            )}
-
-            {error && (
-              <div className="my-3 p-3 bg-danger text-white">
-                {error.message}
-              </div>
-            )}
+    <main className="flex min-h-full flex-col justify-center px-6 py-12 lg:px-8 mt-6">
+      <div className="sm:mx-auto sm:w-full sm:max-w-sm">
+        <img className="h-12 w-auto" src="/src/assets/images/webImages/BudgetBuddy-Logo.png"></img>
+        <h2 className="mt-10 text-center text-2xl leading-9 tracking-tight">Sign in to your account</h2>
+      </div>
+      <div className="mt-10 sm:mx-auto sm:w-full sm:max-w-sm">
+        <form className="space-y-6" noValidate validated={validated} onSubmit={handleFormSubmit}>
+          {/* <Alert color="failure" onDismiss={() => alert('Alert dismissed!')} icon={IoIosAlert}>
+            Something went wrong, please try again.
+          </Alert> */}
+          <div>
+            <div>
+              <Label className='block text-sm font-medium leading-6' htmlFor="email1" value="Your email" />
+            </div>
+            <TextInput className='block w-full rounded-md border-0 py-1.5' id="email1"
+              type="email"
+              placeholder="yourname@email.com"
+              onChange={handleInputChange}
+              value={userFormData.email}
+              required
+            />
           </div>
-        </div>
+          <div>
+            <div className="flex items-center justify-between">
+              <Label className='block text-sm font-medium leading-6' htmlFor="password1" value="Your password" />
+            </div>
+            <TextInput className='block w-full rounded-md border-0 py-1.5 shadow-sm focus:ring-2 focus:ring-inset focus:ring-[#3b7cae]' id="password1" type="password" 
+              onChange={handleInputChange}
+              value={userFormData.password}
+              required
+            />
+            <div class="text-sm">
+            <a href="#" class="font-semibold text-[#2b5b88] hover:text-[#3b7cae]">Forgot password?</a>
+            </div>
+          </div>
+          <div className="flex items-center gap-2">
+            <Checkbox className="rounded-sm active:bg-[#2b5b88]" id="remember" />
+            <Label htmlFor="remember">Remember me</Label>
+          </div>
+          <Button className='flex w-full justify-center rounded-md px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-[#3b7cae] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 bg-[#2b5b88]'
+            // disabled={!(userFormData.email && userFormData.password)}
+            type='submit'
+            variant='success'>
+            Submit
+          </Button>
+        </form>
       </div>
     </main>
   );
