@@ -1,7 +1,7 @@
 "use client";
 // see SignupForm.js for comments
 import { useState } from 'react';
-//import { Button, Checkbox, Label, TextInput, Alert } from 'flowbite-react';
+import { Button, Checkbox, Label, TextInput, Alert } from 'flowbite-react';
 //import { IoIosAlert } from "react-icons/io";
 import { LOGIN_USER } from '../utils/mutations';
 import { useMutation } from '@apollo/client';
@@ -45,11 +45,11 @@ const LoginForm = () => {
   return (
     <main className="flex min-h-full flex-col justify-center px-6 py-12 lg:px-8 mt-6">
       <div className="sm:mx-auto sm:w-full sm:max-w-sm">
-        <img className="h-12 w-auto" src="/src/assets/images/webImages/BudgetBuddy-Logo.png"></img>
+        <img className="h-12 w-auto mx-auto" src="/src/assets/images/webImages/BudgetBuddy-Logo.png"></img>
         <h2 className="mt-10 text-center text-2xl leading-9 tracking-tight">Sign in to your account</h2>
       </div>
       <div className="mt-10 sm:mx-auto sm:w-full sm:max-w-sm">
-        <form className="space-y-6" noValidate validated={validated} onSubmit={handleFormSubmit}>
+        <form className="space-y-6" noValidate onSubmit={handleFormSubmit}>
           {/* <Alert color="failure" onDismiss={() => alert('Alert dismissed!')} icon={IoIosAlert}>
             Something went wrong, please try again.
           </Alert> */}
@@ -57,11 +57,9 @@ const LoginForm = () => {
             <div>
               <Label className='block text-sm font-medium leading-6' htmlFor="email1" value="Your email" />
             </div>
-            <TextInput className='block w-full rounded-md border-0 py-1.5' id="email1"
+            <TextInput className='block text-sm font-medium leading-6' id="email1"
               type="email"
               placeholder="yourname@email.com"
-              onChange={handleInputChange}
-              value={userFormData.email}
               required
             />
           </div>
@@ -70,12 +68,10 @@ const LoginForm = () => {
               <Label className='block text-sm font-medium leading-6' htmlFor="password1" value="Your password" />
             </div>
             <TextInput className='block w-full rounded-md border-0 py-1.5 shadow-sm focus:ring-2 focus:ring-inset focus:ring-[#3b7cae]' id="password1" type="password" 
-              onChange={handleInputChange}
-              value={userFormData.password}
               required
             />
             <div class="text-sm">
-            <a href="#" class="font-semibold text-[#2b5b88] hover:text-[#3b7cae]">Forgot password?</a>
+            <a href="#" className="font-semibold text-[#2b5b88] hover:text-[#3b7cae]">Forgot password?</a>
             </div>
           </div>
           <div className="flex items-center gap-2">
@@ -88,6 +84,10 @@ const LoginForm = () => {
             variant='success'>
             Submit
           </Button>
+          <div className='mt-10 text-center text-sm'>
+            Not a member?
+            <a href="/signup/" className="font-semibold leading-6 ml-1 text-[#2b5b88] hover:text-[#3b7cae]">Sign up</a>
+          </div>
         </form>
       </div>
     </main>
