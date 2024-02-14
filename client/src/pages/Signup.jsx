@@ -1,9 +1,8 @@
 import { useState } from 'react';
-import { Button, Checkbox, Label, TextInput, Alert } from 'flowbite-react';
-//import Link from 'next/link';
-import { ADD_USER } from '../utils/mutations';
+import { Button, Alert } from 'flowbite-react';
 import { useMutation } from '@apollo/client';
 import Auth from '../utils/auth';
+import { Link, useNavigate } from 'react-router-dom';
 
 const SignupForm = () => {
 
@@ -129,5 +128,6 @@ const SignupForm = () => {
     </main>
   );
 };
+
 
 export default SignupForm;

@@ -1,6 +1,6 @@
 const Expenses = () => {
     return (
-  
+        
       <div >
         <p>Expenses</p>
       </div>
