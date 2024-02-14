@@ -3,6 +3,7 @@ import { useParams } from 'react-router-dom';
 import { useQuery } from '@apollo/client';
 import { QUERY_ME } from '../utils/queries';
 import { Bar } from 'react-chartjs-2';
+import Auth from '../utils/auth';
 import { Chart, CategoryScale, LinearScale, BarElement } from 'chart.js';
 import { BarController, CategoryScale as CategoryScaleController, LinearScale as LinearScaleController } from 'chart.js';
 Chart.register(CategoryScale, LinearScale, BarElement, BarController, CategoryScaleController, LinearScaleController);
@@ -46,6 +47,24 @@ const Budget = () => {
   if (loading) {
     return <div>Loading...</div>;
   }
+
+  if (Auth.loggedIn() && Auth.getProfile().data.username === userParam) {
+    return <Navigate to="/me" />;
+  }
+  if (loading) {
+    return <div>Loading...</div>;
+  }
+  if (!user?.username) {
+    return (
+      <div className='w-1/2 container justify-center mx-auto'>
+      <h4>
+        You need to be logged in to see this. Use the navigation links above to
+        sign up or log in!
+      </h4>
+        <a href="/login" className='flex w-full justify-center rounded-md px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-[#3b7cae] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 bg-[#2b5b88]'>Go to Login</a>
+      </div>
+    );
+  };
 
   return (
     <div className="flex flex-col items-center justify-center">
