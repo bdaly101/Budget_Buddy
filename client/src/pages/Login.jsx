@@ -8,7 +8,7 @@ import { useMutation } from '@apollo/client';
 import Auth from '../utils/auth';
 import { Link, useNavigate } from 'react-router-dom'; // Import Link and useNavigate
 
-const LoginForm = () => {
+const LoginForm = (props) => {
   const [formState, setFormState] = useState({ email: '', password: '' });
   const [login, { error, data }] = useMutation(LOGIN_USER);
   const navigate = useNavigate(); // Initialize the useNavigate hook
@@ -51,21 +51,23 @@ const LoginForm = () => {
         <h2 className="mt-10 text-center text-2xl leading-9 tracking-tight">Sign in to your account</h2>
       </div>
       <div className="mt-10 sm:mx-auto sm:w-full sm:max-w-sm">
-        <form className="space-y-6" noValidate onSubmit={handleFormSubmit}>
+        <form className="space-y-6" onSubmit={handleFormSubmit}>
           <div>
             <Label className='block text-sm font-medium leading-6' htmlFor="email" value="Your email" />
-            <TextInput id="email" type="email" placeholder="yourname@email.com" required className="block w-full rounded-md" onChange={handleChange} value={formState.email} />
+            <input 
+              id = "email"
+              name="email"
+              type="email" 
+              placeholder="yourname@email.com" 
+              required 
+              className="block w-full rounded-md" 
+              value={formState.email} 
+              onChange={handleChange} 
+            />
           </div>
           <div>
             <Label className='block text-sm font-medium leading-6' htmlFor="password" value="Your password" />
-            <TextInput id="password" type="password" placeholder="Your password" required className="block w-full rounded-md" onChange={handleChange} value={formState.password} />
-            <div className="text-sm">
-              <Link to="/forgot-password" className="font-semibold text-[#2b5b88] hover:text-[#3b7cae]">Forgot password?</Link>
-            </div>
-          </div>
-          <div className="flex items-center gap-2">
-            <Checkbox className="rounded-sm active:bg-[#2b5b88]" id="remember" />
-            <Label htmlFor="remember">Remember me</Label>
+            <input id="password" name = "password" type="password" placeholder="Your password" required className="block w-full rounded-md" onChange={handleChange} value={formState.password} />
           </div>
           <Button className='flex w-full justify-center rounded-md px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-[#3b7cae] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 bg-[#2b5b88]'
             type='submit'

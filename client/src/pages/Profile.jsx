@@ -65,8 +65,6 @@ const Profile = () => {
       {/* Profile information section */}
       <div className="profile-info">
         <p>Username: {user.username}</p>
-        <p>First Name: {user.firstName}</p>
-        <p>Last Name: {user.lastName}</p>
         <p>Email: {user.email}</p>
         {/* Password input and save button in edit mode */}
         {editMode && (

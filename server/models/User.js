@@ -8,16 +8,6 @@ const userSchema = new Schema(
       required: true,
       unique: true,
     },
-    firstName: {
-      type: String,
-      required: true,
-      unique: false, // Typically, first names are not unique.
-    },
-    lastName: {
-      type: String,
-      required: true,
-      unique: false, // Similarly, last names are not unique.
-    },
     email: {
       type: String,
       required: true,
