@@ -19,6 +19,7 @@ const Home = () => {
   }
 
   if (!user?.username) {
+    console.log("!user?.username")
     return <Navigate to="/login" />;
   }
 
