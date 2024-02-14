@@ -4,8 +4,8 @@ import Header from './components/Header.jsx'
 
 import App from './App.jsx'
 import HomePage from './pages/HomePage';
-import Signup from './components/SignupForm';
-import Login from './components/LoginForm.jsx';
+import Signup from './pages/Signup.jsx';
+import Login from './pages/Login.jsx';
 import Budget from './pages/Budget';
 import Profile from './pages/Profile';
 import Expenses from './pages/Expenses';
