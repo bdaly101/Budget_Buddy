@@ -12,7 +12,7 @@ ChartJS.register(CategoryScale, LinearScale, BarElement);
 const Budget = (props) => {
   const { username: userParam } = useParams();
 
-  const totalExpense = 5;
+  const [totalExpense, setTotalExpense] = useState(user.budget);
   // Extracting the 'username' parameter from the route
   
   // Fetching user data using Apollo Client
