@@ -68,14 +68,7 @@ export const UPDATE_EXPENSE = gql`
   }
 `;
 
-export const UPDATE_PURCHASE = gql`
-  mutation updatePurchase($id: ID!, $cost: Float!) {
-    updatePurchase(id: $id, cost: $cost) {
-      _id
-      cost
-    }
-  }
-`;
+
 
 export const DELETE_USER = gql`
   mutation deleteUser($id: ID!) {
@@ -93,10 +86,5 @@ export const DELETE_EXPENSE = gql`
   }
 `;
 
-export const DELETE_PURCHASE = gql`
-  mutation deletePurchase($id: ID!) {
-    deletePurchase(id: $id) {
-      _id
-    }
-  }
-`;
+
+
