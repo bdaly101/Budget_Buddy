@@ -4,9 +4,9 @@ const typeDefs = `
   
   type Expense {
     _id: ID!
-    name: String!
-    cost: Float!
-    createdAt: Date!
+    name: String
+    cost: Float
+    createdAt: Date
   }
 
   type User {

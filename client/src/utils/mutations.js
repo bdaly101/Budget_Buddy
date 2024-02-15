@@ -25,28 +25,18 @@ export const LOGIN_USER = gql`
 `;
 
 export const CREATE_EXPENSE = gql`
-  mutation createExpense($name: String!, $userId: ID!) {
-    createExpense(name: $name, userId: $userId) {
+  mutation createExpense($name: String!, $cost: Float!, $userId: ID!) {
+    createExpense(name: $name, cost: $cost, userId: $userId) {
       _id
       name
-      purchases {
-        _id
-        cost
-        createdAt
-      }
+      cost
+      createdAt
+      
     }
   }
 `;
 
-export const ADD_PURCHASE = gql`
-  mutation addPurchase($cost: Float!, $expenseId: ID!) {
-    addPurchase(cost: $cost, expenseId: $expenseId) {
-      _id
-      cost
-      createdAt
-    }
-  }
-`;
+
 
 export const UPDATE_USER = gql`
   mutation updateUser($id: ID!, $budget: Float) {

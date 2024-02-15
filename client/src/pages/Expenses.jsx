@@ -6,6 +6,7 @@ import { CREATE_EXPENSE, DELETE_EXPENSE } from '../utils/mutations';
 const Expenses = () => {
     const navigate = useNavigate();
     const [newExpenseName, setNewExpenseName] = useState('');
+    const [newExpenseCost, setNewExpenseCost] = useState('');
     const { loading, data } = useQuery(QUERY_ME);
     const [createExpense] = useMutation(CREATE_EXPENSE);
     const [deleteExpense] = useMutation(DELETE_EXPENSE); // Use the deleteExpense mutation
@@ -20,15 +21,20 @@ const Expenses = () => {
     }, [loading, data]);
   
     const handleAddExpense = async () => {
+        
+        console.log(newExpenseCost)
       try {
         const { data: expenseData } = await createExpense({
           variables: {
             name: newExpenseName,
+            cost: newExpenseCost,
             userId: data.me._id // Assuming you have the user's ID in the fetched data
           },
         });
+        
         setExpenses([...expenses, expenseData.createExpense]);
         setNewExpenseName('');
+        setNewExpenseCost('')
       } catch (error) {
         console.error("Error creating expense:", error);
       }
@@ -57,6 +63,13 @@ const Expenses = () => {
             value={newExpenseName}
             onChange={(e) => setNewExpenseName(e.target.value)}
             placeholder="Enter expense name"
+            className="p-2 border rounded-md focus:outline-none focus:ring focus:border-blue-300 flex-grow"
+          />
+          <input
+            type="number"
+            value={newExpenseCost}
+            onChange={(e) => setNewExpenseCost(e.target.value)}
+            placeholder="Enter expense cost"
             className="p-2 border rounded-md focus:outline-none focus:ring focus:border-blue-300 flex-grow"
           />
           <button
