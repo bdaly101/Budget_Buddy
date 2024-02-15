@@ -1,13 +1,12 @@
 import { gql } from '@apollo/client';
 
 export const ADD_USER = gql`
-  mutation addUser($username: String!, $email: String!) {
+  mutation addUser($username: String!, $email: String!, $password: String!) {
     addUser(username: $username, email: $email, password: $password) {
       token
       user {
         _id
         username
-        email
       }
     }
   }
@@ -50,14 +49,15 @@ export const ADD_PURCHASE = gql`
 `;
 
 export const UPDATE_USER = gql`
-  mutation updateUser($id: ID!, $username: String,  $email: String, $password: String) {
-    updateUser(id: $id, username: $username, email: $email, password: $password) {
+  mutation updateUser($id: ID!, $budget: Float) {
+    updateUser(id: $id, budget: $budget) {
       _id
       username
       budget
     }
   }
 `;
+
 
 export const UPDATE_EXPENSE = gql`
   mutation updateExpense($id: ID!, $name: String!) {
@@ -68,14 +68,7 @@ export const UPDATE_EXPENSE = gql`
   }
 `;
 
-export const UPDATE_PURCHASE = gql`
-  mutation updatePurchase($id: ID!, $cost: Float!) {
-    updatePurchase(id: $id, cost: $cost) {
-      _id
-      cost
-    }
-  }
-`;
+
 
 export const DELETE_USER = gql`
   mutation deleteUser($id: ID!) {
@@ -93,10 +86,5 @@ export const DELETE_EXPENSE = gql`
   }
 `;
 
-export const DELETE_PURCHASE = gql`
-  mutation deletePurchase($id: ID!) {
-    deletePurchase(id: $id) {
-      _id
-    }
-  }
-`;
+
+

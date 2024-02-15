@@ -1,16 +1,12 @@
 const typeDefs = `
   scalar Date
 
-  type Purchase {
-    _id: ID!
-    cost: Float!
-    createdAt: Date!
-  }
-
+  
   type Expense {
     _id: ID!
     name: String!
-    purchases: [Purchase]
+    cost: Float!
+    createdAt: Date!
   }
 
   type User {
@@ -32,22 +28,20 @@ const typeDefs = `
     getUserById(id: ID!): User
     getExpenses: [Expense]
     getExpenseById(id: ID!): Expense
-    getPurchases: [Purchase]
-    getPurchaseById(id: ID!): Purchase
     me: User
   }
 
   type Mutation {
     addUser(username: String!, email: String!, password: String!): Auth
     login(email: String!, password: String!): Auth
-    createExpense(name: String!, userId: ID!): Expense
-    addPurchase(cost: Float!, expenseId: ID!): Purchase
-    updateUser(id: ID!, username: String, email: String, password: String, budget: Float): User
-    updateExpense(id: ID!, name: String!): Expense
-    updatePurchase(id: ID!, cost: Float!): Purchase
+    createExpense(name: String!, cost: Float! userId: ID!): Expense
+    
+    updateUser(id: ID!, budget: Float): User
+    updateExpense(id: ID!, name: String, cost: Float): Expense
+    
     deleteUser(id: ID!): User
     deleteExpense(id: ID!): Expense
-    deletePurchase(id: ID!): Purchase
+    
   }
 `;
 

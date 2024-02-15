@@ -27,14 +27,14 @@ const Signup = () => {
 
   const handleFormSubmit = async (event) => {
     event.preventDefault();
-    console.log(userFormData);
+    //console.log(userFormData);
     try {
       const { data } = await addUser({
         variables: { ...userFormData },
       });
 
       Auth.login(data.addUser.token);
-      navigate('/homepage'); // Redirect user to the homepage
+      navigate('/home'); // Redirect user to the homepage
     } catch (err) {
       console.error(err);
       // Handle error or show alert

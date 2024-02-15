@@ -1,4 +1,3 @@
-
 import React, { useState } from 'react';
 import { useParams, Navigate } from 'react-router-dom';
 import { useQuery } from '@apollo/client';
@@ -8,40 +7,25 @@ import { QUERY_ME } from '../utils/queries';
 import Auth from '../utils/auth';
 
 const Profile = () => {
-  // Extract the username parameter from the URL
   const { username: userParam } = useParams();
-
-
-  // Fetch user data based on the username parameter using Apollo Client's useQuery hook
-
   const { loading, data } = useQuery(userParam ? QUERY_USER : QUERY_ME, {
     variables: { username: userParam },
   });
 
-  // Destructure user data from the query result
   const user = data?.me || data?.user || {};
-
-  // navigate to personal profile page if username is yours
-
-
-  // State for controlling edit mode
   const [editMode, setEditMode] = useState(false);
-
-  // Redirect to the personal profile page if the logged-in user is viewing their own profile
 
   if (Auth.loggedIn() && Auth.getProfile().data.username === userParam) {
     return <Navigate to="/me" />;
   }
 
-  // Display a loading message while fetching data
   if (loading) {
     return <div>Loading...</div>;
   }
 
-  // If the user is not logged in or the queried user doesn't exist, display a message
   if (!user?.username) {
     return (
-      <h4>
+      <h4 className="text-center mt-8 text-red-500">
         You need to be logged in to see this. Use the navigation links above to
         sign up or log in!
       </h4>
@@ -49,33 +33,52 @@ const Profile = () => {
   }
 
   return (
-
-    <div className="profile-container">
-      {/* Profile header section */}
-      <div className="profile-header">
-        <h2>
+    <div className="profile-container bg-gray-100 p-8 rounded-md">
+      <div className="profile-header mb-4">
+        <h2 className="text-2xl font-semibold">
           Viewing {userParam ? `${user.username}'s` : 'your'} profile.
         </h2>
-        {/* Button to toggle edit mode */}
         {!userParam && (
-          <button onClick={() => setEditMode(true)}>Edit Information</button>
+          <button
+            onClick={() => setEditMode(true)}
+            className="bg-blue-500 text-white px-4 py-2 rounded-md focus:outline-none focus:ring focus:border-blue-300"
+          >
+            Edit Information
+          </button>
         )}
       </div>
 
-      {/* Profile information section */}
       <div className="profile-info">
-        <p>Username: {user.username}</p>
-        <p>Email: {user.email}</p>
-        {/* Password input and save button in edit mode */}
-        {editMode && (
-          <div>
-            <label htmlFor="password">Password: </label>
-            <input type="password" id="password" />
+        <p className="mb-2">
+          <span className="font-semibold">Username:</span> {user.username}
+        </p>
+        <p className="mb-2">
+          <span className="font-semibold">Email:</span> {user.email}
+        </p>
+        <p className="mb-2">
+          <span className="font-semibold">Budget:</span> {user.budget}
+        </p>
 
+        {editMode && (
+          <div className="mb-4">
+            <label htmlFor="password" className="block text-sm font-medium text-gray-700">
+              Password:
+            </label>
+            <input
+              type="password"
+              id="password"
+              className="mt-1 p-2 border rounded-md focus:outline-none focus:ring focus:border-blue-300"
+            />
           </div>
         )}
+
         {editMode && (
-          <button onClick={() => setEditMode(false)}>Save Changes</button> //save changes button
+          <button
+            onClick={() => setEditMode(false)}
+            className="bg-blue-500 text-white px-4 py-2 rounded-md focus:outline-none focus:ring focus:border-blue-300"
+          >
+            Save Changes
+          </button>
         )}
       </div>
     </div>

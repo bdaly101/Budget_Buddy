@@ -29,15 +29,21 @@ const router = createBrowserRouter([
         path: '/signup',
         element: <Signup />
       }, {
-        path: '/me',
-        element: <Profile />
+        path: '/home',
+        element: <HomePage />
       }, {
         path: '/budget',
         element: <Budget />
-      }, {
+      }, 
+      {
+        path: '/profile',
+        element: <Profile />
+      }, 
+      {
         path: '/expenses',
         element: <Expenses />
-      }, {
+      }, 
+      {
         path: '/expenses/:expenseID',
         element: <SingleExpense />
       }
