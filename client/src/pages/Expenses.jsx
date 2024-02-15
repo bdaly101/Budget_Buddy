@@ -22,12 +22,12 @@ const Expenses = () => {
   
     const handleAddExpense = async () => {
         
-        console.log(newExpenseCost)
+        console.log(parseFloat(newExpenseCost))
       try {
         const { data: expenseData } = await createExpense({
           variables: {
             name: newExpenseName,
-            cost: newExpenseCost,
+            cost: parseFloat(newExpenseCost),
             userId: data.me._id // Assuming you have the user's ID in the fetched data
           },
         });

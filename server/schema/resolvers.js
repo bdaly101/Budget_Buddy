@@ -56,8 +56,8 @@ const resolvers = {
       const token = signToken(user);
       return { token, user };
     },
-    createExpense: async (parent, { name, userId }) => {
-      const expense = await Expense.create({ name, user: userId });
+    createExpense: async (parent, { name, cost, userId }) => {
+      const expense = await Expense.create({ name, cost, user: userId });
       await User.findByIdAndUpdate(userId, { $push: { expenses: expense._id } });
       return expense;
     },
