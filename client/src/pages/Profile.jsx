@@ -66,6 +66,7 @@ const Profile = () => {
       <div className="profile-info">
         <p>Username: {user.username}</p>
         <p>Email: {user.email}</p>
+        <p>Budget: {user.budget}</p>
         {/* Password input and save button in edit mode */}
         {editMode && (
           <div>

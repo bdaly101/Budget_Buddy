@@ -40,15 +40,19 @@ const resolvers = {
   },
 
   Mutation: {
-    addUser: async (parent, args) => {
+    addUser: async (parent, { username, email, password, budget }) => {
+      // Set a default value for budget
+      const userBudget = 0;
       try {
         
-        const user = await User.create({...args});
-        console.log(user)
+        const user = await User.create({ username, email, password, budget: userBudget });
+        console.log(user);
         const token = signToken(user);
         return { token, user };
       } catch (error) {
-        console.log(error);
+        console.error(error);
+        
+        throw new Error('Error creating user');
       }
     },
     login: async (parent, { email, password }) => {
@@ -75,8 +79,8 @@ const resolvers = {
       await Expense.findByIdAndUpdate(expenseId, { $push: { purchases: purchase._id } });
       return purchase;
     },
-    updateUser: async (parent, { id, ...args }) => {
-      return User.findByIdAndUpdate(id, args, { new: true });
+    updateUser: async (parent, { id, budget }) => {
+      return User.findByIdAndUpdate(id, { budget }, { new: true });
     },
     updateExpense: async (parent, { id, name }) => {
       return Expense.findByIdAndUpdate(id, { name }, { new: true });

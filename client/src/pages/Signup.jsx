@@ -34,7 +34,7 @@ const Signup = () => {
       });
 
       Auth.login(data.addUser.token);
-      navigate('/homepage'); // Redirect user to the homepage
+      navigate('/home'); // Redirect user to the homepage
     } catch (err) {
       console.error(err);
       // Handle error or show alert
