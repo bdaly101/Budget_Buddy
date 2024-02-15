@@ -49,14 +49,15 @@ export const ADD_PURCHASE = gql`
 `;
 
 export const UPDATE_USER = gql`
-  mutation updateUser($id: ID!, $username: String,  $email: String, $password: String) {
-    updateUser(id: $id, username: $username, email: $email, password: $password) {
+  mutation updateUser($id: ID!, $budget: Float) {
+    updateUser(id: $id, budget: $budget) {
       _id
       username
       budget
     }
   }
 `;
+
 
 export const UPDATE_EXPENSE = gql`
   mutation updateExpense($id: ID!, $name: String!) {
