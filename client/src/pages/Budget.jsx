@@ -58,8 +58,7 @@ const Budget = () => {
     return (
       <div className='w-1/2 container justify-center mx-auto'>
       <h4>
-        You need to be logged in to see this. Use the navigation links above to
-        sign up or log in!
+        You need to be logged in to see this.
       </h4>
         <a href="/login" className='flex w-full justify-center rounded-md px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-[#3b7cae] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 bg-[#2b5b88]'>Go to Login</a>
       </div>
