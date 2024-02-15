@@ -38,14 +38,7 @@ const Profile = () => {
         <h2 className="text-2xl font-semibold">
           Viewing {userParam ? `${user.username}'s` : 'your'} profile.
         </h2>
-        {!userParam && (
-          <button
-            onClick={() => setEditMode(true)}
-            className="bg-blue-500 text-white px-4 py-2 rounded-md focus:outline-none focus:ring focus:border-blue-300"
-          >
-            Edit Information
-          </button>
-        )}
+
       </div>
 
       <div className="profile-info">
