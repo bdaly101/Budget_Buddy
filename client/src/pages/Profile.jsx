@@ -56,10 +56,7 @@ const Profile = () => {
         <h2>
           Viewing {userParam ? `${user.username}'s` : 'your'} profile.
         </h2>
-        {/* Button to toggle edit mode */}
-        {!userParam && (
-          <button onClick={() => setEditMode(true)}>Edit Information</button>
-        )}
+        
       </div>
 
       {/* Profile information section */}

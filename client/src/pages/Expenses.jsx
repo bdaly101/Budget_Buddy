@@ -1,13 +1,16 @@
 import React, { useState, useEffect } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useParams, useNavigate } from 'react-router-dom';
 import { useQuery, useMutation } from '@apollo/client';
 import { QUERY_ME } from '../utils/queries'; // Ensure DELETE_EXPENSE is imported
 import { CREATE_EXPENSE, DELETE_EXPENSE } from '../utils/mutations';
 const Expenses = () => {
+    const { username: userParam } = useParams();
+
     const navigate = useNavigate();
     const [newExpenseName, setNewExpenseName] = useState('');
     const [newExpenseCost, setNewExpenseCost] = useState('');
     const { loading, data } = useQuery(QUERY_ME);
+    const user = data?.me || {};
     const [createExpense] = useMutation(CREATE_EXPENSE);
     const [deleteExpense] = useMutation(DELETE_EXPENSE); // Use the deleteExpense mutation
     const [expenses, setExpenses] = useState([]);
@@ -52,6 +55,20 @@ const Expenses = () => {
         } catch (error) {
           console.error("Error deleting expense:", error);
         }
+      };
+
+      if (loading) return <div>Loading...</div>;
+
+      if (!user?.username) {
+        return (
+          <div className='w-1/2 container justify-center mx-auto'>
+          <h4>
+            You need to be logged in to see this. Use the navigation links above to
+            sign up or log in!
+          </h4>
+            <a href="/login" className='flex w-full justify-center rounded-md px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-[#3b7cae] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 bg-[#2b5b88]'>Go to Login</a>
+          </div>
+        );
       };
   
     return (

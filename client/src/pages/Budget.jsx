@@ -19,17 +19,13 @@ const Budget = (props) => {
   const { loading, data } = useQuery(QUERY_ME);
   const user = data?.me || {};
   console.log(user)
-  const [totalExpense, setTotalExpense] = useState(user.budget);
+  const [totalExpense, setTotalExpense] = useState(user.expenses);
   // State for managing edit mode and budget value
   const [budgetValue, setBudgetValue] = useState(user.budget);
 
   const [updateUser, { error }] = useMutation(UPDATE_USER);
 
-  useEffect(() => {
-    if (!loading && user?.budget) {
-      setBudgetValue(user.budget);
-    }
-  }, [loading, user?.budget]);
+  
 
   const [chartData, setChartData] = useState({
     labels: ['Spent', 'Remaining'],
@@ -44,21 +40,26 @@ const Budget = (props) => {
     ],
   });
 
+  const calculateTotalExpense = () => {
+    const totalExpense = user.expenses?.reduce((acc, curr) => acc + curr.cost, 0) || 0;
+    return totalExpense;
+  };
+
   useEffect(() => {
-    setChartData({
-      labels: ['Spent', 'Remaining'],
-      datasets: [
-        {
+    if (!loading && user.budget) {
+      setBudgetValue(user.budget);
+      const totalExpense = calculateTotalExpense();
+      setChartData({
+        labels: ['Spent', 'Remaining'],
+        datasets: [{
           label: 'Budget Overview',
-          data: [totalExpense, budgetValue],
+          data: [totalExpense, Math.max(user.budget - totalExpense, 0)], // Ensure the remaining budget cannot be negative
           backgroundColor: ['rgba(75, 192, 192, 0.6)', 'rgba(255, 99, 132, 0.6)'],
           borderWidth: 1,
-          barPercentage: 0.7,
-        },
-      ],
-    });
-  }, [totalExpense, budgetValue]);
-
+        }],
+      });
+    }
+  }, [loading, user.budget, user.expenses]);
   
 
   const handleFormSubmit = async (event) => {
@@ -74,19 +75,16 @@ const Budget = (props) => {
         
       });
 
-        setChartData({
-          labels: ['Spent', 'Remaining'],
-          datasets: [
-            {
-              label: 'Budget Overview',
-              data: [totalExpense, budgetValue - totalExpense], // Example spent value of 5 for illustration
-              backgroundColor: ['rgba(75, 192, 192, 0.6)', 'rgba(255, 99, 132, 0.6)'],
-              borderWidth: 1,
-              barPercentage: 0.7,
-            },
-          ],
-        });
-
+      const totalExpense = calculateTotalExpense();
+      setChartData({
+        labels: ['Spent', 'Remaining'],
+        datasets: [{
+          label: 'Budget Overview',
+          data: [totalExpense, Math.max(budgetValue - totalExpense, 0)],
+          backgroundColor: ['rgba(75, 192, 192, 0.6)', 'rgba(255, 99, 132, 0.6)'],
+          borderWidth: 1,
+        }],
+      });
     } catch (err) {
       console.error(err);
     }
@@ -111,6 +109,7 @@ const Budget = (props) => {
       {/* Budget Header */}
       <div className="budget-header mb-4">
         <h2>Viewing {user.username} budget.</h2>
+        <h3>Total Spent: ${calculateTotalExpense().toFixed(2)}</h3>
       </div>
 
       {/* Budget Input Form */}
@@ -121,7 +120,7 @@ const Budget = (props) => {
           Budget:
         </label>
         <input
-          type="text"
+          type="number"
           id="moneyAvailable"
           value={budgetValue}
           onChange={(e) => setBudgetValue(Number(e.target.value))}
