@@ -6,7 +6,7 @@ const expenseSchema = new Schema({
   // The name field is of type String and is required for every Expense document.
   name: {
     type: String,
-    required: true,
+    required: false,
   },
   // The purchases field is an array of ObjectId references to documents in the Purchase collection.
   // This creates a relationship between Expense documents and Purchase documents.

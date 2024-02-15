@@ -12,14 +12,14 @@ ChartJS.register(CategoryScale, LinearScale, BarElement);
 const Budget = (props) => {
   const { username: userParam } = useParams();
 
-  const [totalExpense, setTotalExpense] = useState(user.budget);
+  
   // Extracting the 'username' parameter from the route
   
   // Fetching user data using Apollo Client
   const { loading, data } = useQuery(QUERY_ME);
   const user = data?.me || {};
   console.log(user)
-
+  const [totalExpense, setTotalExpense] = useState(user.budget);
   // State for managing edit mode and budget value
   const [budgetValue, setBudgetValue] = useState(user.budget);
 

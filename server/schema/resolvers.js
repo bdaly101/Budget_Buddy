@@ -12,10 +12,10 @@ const resolvers = {
       return User.findById(id).populate('expenses');
     },
     getExpenses: async () => {
-      return Expense.find().populate('purchases');
+      return Expense.find();
     },
     getExpenseById: async (parent, { id }) => {
-      return Expense.findById(id).populate('purchases');
+      return Expense.findById(id);
     },
     
     me: async (parent, args, context) => {
